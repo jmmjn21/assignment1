@@ -2,6 +2,12 @@
 
 ## Example of use
 
+You can run the application executing the following command:
+
+```shell
+node index.js
+```
+
 You can put in your PATH somethig like
 
 ```shell
