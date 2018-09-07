@@ -23,7 +23,7 @@ const middleware = function (req, res) {
 
   req.on('end', () =>{
     reqObject = utils.getRequestObject(req, body)
-    const chosenHandler = typeof(router[reqObject.path]) !== 'undefined' ? router[reqObject.path] : router['hello']
+    const chosenHandler =  router[choseRouter(reqObject.path)]
     chosenHandler(reqObject, (statusCode, response) =>{
       statusCode = typeof(statusCode) === 'number' ? statusCode : 400
       response = typeof(response) === 'object' ? response : {}
@@ -32,4 +32,15 @@ const middleware = function (req, res) {
       res.end(JSON.stringify(response))
     })
   })
+}
+
+const choseRouter = function(path){
+  const operationNames = Object.keys(router)
+  let myRoute = 'notFound' //default
+  operationNames.map(name =>{
+    if(path.indexOf(name) >= 0){
+      myRoute = name
+    }
+  })
+  return myRoute
 }
