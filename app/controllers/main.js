@@ -3,7 +3,8 @@ const handlers = {}
 
 handlers.hello = function(reqObj, callback){
   const allowedMethod = ['get', 'post']
-  const myName = reqObj.pathParams[1]
+  let myName = reqObj.pathParams[1]
+  myName = typeof(myName) !== 'undefined' ? myName : ''
 
   if(allowedMethod.indexOf(reqObj.method) >= 0){
     callback(200, {message: `Hello ${myName}`})
